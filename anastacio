@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        function login() {
+            var usuario = document.getElementById("usuario").value;
+            var senha = document.getElementById("senha").value;
+            var navegador = navigator.userAgent;
+
+            google.script.run.withSuccessHandler(function(link) {
+                if (link) {
+                    google.script.run.registrarAcesso(usuario, navegador, link);
+                    window.location.href = link;
+                } else {
+                    alert("Usuário ou senha incorretos!");
+                }
+            }).validarUsuario(usuario, senha);
+        }
+    </script>
+</head>
+<body class="flex items-center justify-center h-screen bg-gradient-to-r from-black via-gray-800 to-black">
+    <!-- Título centralizado -->
+    <h1 class="text-4xl text-white absolute top-10">RELATÓRIOS BI DE SANTA</h1>
+
+    <div class="absolute top-4 left-4">
+        <img src="https://i.imgur.com/Gj00JsZ.png" alt="Logo" width="150" height="100">
+    </div>
+    <div class="bg-white p-8 rounded-lg shadow-lg w-80">
+        <h2 class="text-center text-2xl font-semibold mb-4 text-gray-700">Login</h2>
+        <input type="text" id="usuario" placeholder="Usuário" class="w-full p-2 border rounded mb-3 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+        <input type="password" id="senha" placeholder="Senha" class="w-full p-2 border rounded mb-4 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+        <button onclick="login()" class="w-full bg-black text-white py-2 rounded hover:bg-gray-600 transition-all">Entrar</button>
+    </div>
+</body>
+</html>
